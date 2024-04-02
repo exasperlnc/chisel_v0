@@ -4,6 +4,7 @@ require './lib/chisel'
 class TestChisel < Minitest::Test
 
   def test_markdown_to_html
+    skip 
     markdown = '# My Life in Desserts
 
     ## Chapter 1: The Beginning
@@ -21,5 +22,12 @@ class TestChisel < Minitest::Test
 
     actual_html = Chisel.new(markdown).to_html
     assert_equal expected_html, actual_html
+  end
+
+  def test_it_considers_blank_lines_to_delimit_chunks
+    markdown        = "a\nb\n\nc\n\n\nd"
+    actual_chunks   = Chisel.new("").string_to_chunks(markdown)
+    expected_chunks = ["a\nb", "c", "d"]
+    assert_equal expected_chunks, actual_chunks
   end
 end

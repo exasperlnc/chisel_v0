@@ -4,7 +4,15 @@ class Chisel
   end
 
   def to_html
-    @markdown.reverse
+    markdown_chunks = string_to_chunks(@markdown)
+    html_chunks = markdown_chunks.map do |chunk|
+      chunk_to_html(chunk)
+    end
+    chunks_to_string(html_chunks)
+  end
+
+  def string_to_chunks(string)
+    string.split(/\n\n+/)
   end
 end
 markdown_file = ARGV[0]
