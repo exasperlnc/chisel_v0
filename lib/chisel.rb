@@ -17,8 +17,16 @@ class Chisel
   
   def chunk_to_html(chunk)
     # convert_headers if header?
+    if header?(chunk)
+      convert_headers(chunk)
+    else
+      # convert paragraphs otherwise
+      convert_paragraphs(chunk)
+    end
+  end
 
-    # convert paragraphs otherwise
+  def header?(chunk)
+    chunk[0] == '#'
   end
 
   def convert_paragraphs(chunk)
