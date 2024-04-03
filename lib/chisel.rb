@@ -14,8 +14,23 @@ class Chisel
   def string_to_chunks(string)
     string.split(/\n\n+/)
   end
-
+  
   def chunk_to_html(chunk)
+    # convert_headers if header?
+
+    # convert paragraphs otherwise
+  end
+
+  def convert_paragraphs(chunk)
+    # add the double space to each line
+    chunk_lines        = chunk.lines
+    indented_lines     = chunk_lines.map { |line| "  #{line.chomp}\n"}
+    indented_paragraph = indented_lines.join
+    # wrap the lines with <p>
+    "<p>\n#{indented_paragraph}</p>"
+  end
+
+  def convert_headers(chunk)
     # remove the leading hashes and whitespace
     first_char = chunk.index(' ') + 1
     chunk_text = chunk[first_char..-1]

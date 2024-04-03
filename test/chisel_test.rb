@@ -34,11 +34,14 @@ class TestChisel < Minitest::Test
   def test_it_converts_chunks_beginning_with_hashes_into_headers_of_that_level
     input_chunk = "# My Life In Desserts"
     expected_html = "<h1>My Life In Desserts</h1>"
-    output        = Chisel.new("").chunk_to_html(input_chunk)
+    output        = Chisel.new("").convert_headers(input_chunk)
     assert_equal expected_html, output
   end
 
   def test_it_converts_every_other_chunk_into_a_paragraph
-    skip
+    expected_html = "<p>\n  line1 \n  line2 \n</p>"
+    input_chunk   = "line1 \nline2 " 
+    output        = Chisel.new("").convert_paragraphs(input_chunk) 
+    assert_equal expected_html, output
   end
 end
