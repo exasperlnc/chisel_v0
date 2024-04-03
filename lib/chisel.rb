@@ -14,6 +14,15 @@ class Chisel
   def string_to_chunks(string)
     string.split(/\n\n+/)
   end
+
+  def chunk_to_html(chunk)
+    # remove the leading hashes and whitespace
+    first_char = chunk.index(' ') + 1
+    chunk_text = chunk[first_char..-1]
+    # insert the correct tags 
+    level      = first_char - 1
+    "<h#{level}>#{chunk_text}</h#{level}>" 
+  end
 end
 markdown_file = ARGV[0]
 html_file = ARGV[1]

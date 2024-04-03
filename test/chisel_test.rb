@@ -30,4 +30,15 @@ class TestChisel < Minitest::Test
     expected_chunks = ["a\nb", "c", "d"]
     assert_equal expected_chunks, actual_chunks
   end
+
+  def test_it_converts_chunks_beginning_with_hashes_into_headers_of_that_level
+    input_chunk = "# My Life In Desserts"
+    expected_html = "<h1>My Life In Desserts</h1>"
+    output        = Chisel.new("").chunk_to_html(input_chunk)
+    assert_equal expected_html, output
+  end
+
+  def test_it_converts_every_other_chunk_into_a_paragraph
+    skip
+  end
 end
